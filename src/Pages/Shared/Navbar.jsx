@@ -1,11 +1,29 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import useCart from "../../Hook/useCart";
+import { CiShoppingCart } from "react-icons/ci";
 const Navbar = () => {
+  const {user, logOut} = useContext(AuthContext);
+  const [cart] = useCart();
+  const handleLogOut = ()=>{
+    logOut()
+    .then(()=>{})
+    .catch(error=>console.error(error));
+  }
     const Navlinks = <>
         <Link>Home</Link>
-        <Link>Contuct Us</Link>
-        <Link>Dashboard</Link>
+        <Link to='/register'>Register</Link>
         <Link to='/menu'>Our Menu</Link>
         <Link to='/order'>Order</Link>
+        <Link to='/secret'>Secret</Link>
+        <Link to='/'>
+          <button className="flex justify-center items-center">
+          <CiShoppingCart size={28}/>
+            <div className="badge badge-secondary"> +{cart.length}</div>
+          </button>
+        </Link>
+      
     </>
     return (
       <div className="navbar fixed z-10 bg-opacity-25 bg-black max-w-screen-xl text-white">
@@ -26,7 +44,14 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <a className="btn">Button</a>
+          {
+          user ? <>
+          <button onClick={handleLogOut} className="btn btn-gost">LogOut</button>
+          </>:
+          <>
+          <Link to='/login'>Login</Link>
+          </>
+        }
           </div>
       </div>
     );
