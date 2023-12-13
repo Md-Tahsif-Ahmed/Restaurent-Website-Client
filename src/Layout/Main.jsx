@@ -5,7 +5,7 @@ import Navbar from "../Pages/Shared/Navbar";
 const Main = () => {
     const location = useLocation();
     console.log(location);
-    const noHF = location.pathname.includes('login')||location.pathname.includes('register')
+    const noHF = location.pathname.includes('login')||location.pathname.includes('register')|| location.pathname.includes('dashboard/cart')
     return (
         <div>
             { noHF || <Navbar></Navbar> }

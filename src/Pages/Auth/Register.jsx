@@ -6,22 +6,46 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from 'sweetalert2'
+import useAxiosPublic from "../../Hook/useAxiosPublic";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const {createUser} = useContext(AuthContext)
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { createUser } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        console.log(data)
-        createUser(data.name, data.photo, data.email, data.password)
-        .then(res=>{
+        console.log(data);
+
+        try {
+            const res = await createUser(data.name, data.photo, data.email, data.password);
             const loggedUser = res.user;
             console.log(loggedUser);
-        })
-      
+
+            const userInfo = {
+                name: data.name,
+                email: data.email
+            };
+
+            const userRes = await axiosPublic.post('/user', userInfo);
+
+            if (userRes.data.insertedId) {
+                reset();
+                Swal.fire({
+                    title: "Created",
+                    text: `User created successfully`,
+                    icon: "success"
+                });
+                navigate('/');
+            }
+        } catch (error) {
+            console.error(error);
+            // Handle error, show toast, etc.
+        }
     };
 
-    return (
+   return (
         <div>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row">
@@ -66,7 +90,8 @@ const Register = () => {
                                 <button type="submit" className="btn btn-primary">Register</button>
                             </div>
                         </form>
-                        <p>Already have an Account?<Link to='/login'>Login</Link></p>
+                        <p className="text-center mt-4">Already have an Account?<Link to='/login'>Login</Link></p>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2'
 import { AuthContext } from '../../Providers/AuthProvider';
+import SocialLogin from './SocialLogin';
 
 
 const Login = () => {
@@ -100,7 +101,9 @@ const Login = () => {
                                 <button disabled={disable} className="btn btn-primary">Login</button>
                             </div>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
+                    
                 </div>
             </div>
             <ToastContainer></ToastContainer>

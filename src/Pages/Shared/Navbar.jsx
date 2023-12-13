@@ -17,7 +17,7 @@ const Navbar = () => {
         <Link to='/menu'>Our Menu</Link>
         <Link to='/order'>Order</Link>
         <Link to='/secret'>Secret</Link>
-        <Link to='/'>
+        <Link to='/dashboard/cart'>
           <button className="flex justify-center items-center">
           <CiShoppingCart size={28}/>
             <div className="badge badge-secondary"> +{cart.length}</div>

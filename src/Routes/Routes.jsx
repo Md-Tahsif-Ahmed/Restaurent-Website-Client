@@ -7,36 +7,48 @@ import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import Secret from "../Pages/Shared/Secret";
 import PrivateRoute from "./PrivateRoute";
-export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main></Main>,
-      children: [
-        {
-            path: '/',
-            element: <Home></Home>,
-        },
-        {
-          path:'/menu',
-          element: <Menu></Menu>,
-        },
-        {
-          path:'/order',
-          element: <Order></Order>,
-        },
-        {
-          path: '/login',
-          element: <Login></Login>
-        },
-        {
-          path: '/register',
-          element:  <Register></Register>,
-        },
-        {
-          path: '/secret',
-          element: <PrivateRoute><Secret></Secret></PrivateRoute>,
-        }
+import Dashboard from "../Layout/Dashboard";
+import Cart from "../Pages/Dashboard/Cart/Cart";
 
-      ]
-    },
-  ]);
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: '/',
+        element: <Home></Home>,
+      },
+      {
+        path: '/menu',
+        element: <Menu></Menu>,
+      },
+      {
+        path: '/order',
+        element: <Order></Order>,
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/register',
+        element:  <Register></Register>,
+      },
+      {
+        path: '/secret',
+        element: <PrivateRoute><Secret></Secret></PrivateRoute>,
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
+          {
+            path: 'cart', // Adjusted path to be relative to its parent "/dashboard"
+            element: <Cart></Cart>,
+          },
+        ],
+      },
+    ],
+  },
+]);
