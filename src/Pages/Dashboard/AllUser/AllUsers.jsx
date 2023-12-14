@@ -6,13 +6,21 @@ import Swal from "sweetalert2";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
-    const {data: users =[], refetch} = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: async ()=>{
-            const res = await axiosSecure.get('/user');
-            return res.data;
-        }
-    })
+        queryFn: async () => {
+            try {
+                console.log('Headers:', {
+                    Authorization: `Bearer ${localStorage.getItem('access-token')}`,
+                });
+                const res = await axiosSecure.get('/user');
+                return res.data;
+            } catch (error) {
+                console.error("Error fetching users:", error);
+                throw error;
+            }
+        },
+    });
     const handleDelete=(user)=>{
         Swal.fire({
             title: "Are you sure?",

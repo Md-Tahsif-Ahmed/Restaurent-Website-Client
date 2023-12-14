@@ -2,12 +2,13 @@ import { NavLink, Outlet } from "react-router-dom";
 import { CiBookmark, CiCalendar, CiHome, CiReceipt, CiSearch, CiShoppingCart } from "react-icons/ci";
 import useCart from "../Hook/useCart";
 import { FaList, FaUser } from "react-icons/fa";
+import useAdmin from "../Hook/useAdmin";
  
 
 const Dashboard = () => {
     const [cart] = useCart();
     // TODO: get admin value from the db
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className="flex">
             {
