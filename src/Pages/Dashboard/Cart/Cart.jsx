@@ -2,6 +2,7 @@ import { CiTrash } from "react-icons/ci";
 import useCart from "../../../Hook/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart, refetch] = useCart();
@@ -40,11 +41,19 @@ const Cart = () => {
     };
 
     return (
-        <div className="">
+        <div className="mt-8 ml-8">
             <div className="flex justify-evenly">
                 <h2 className="text-4xl">Items: {cart.length}</h2>
                 <h2 className="text-4xl">TotalPrice: {TotalPrice}</h2>
+                {
+                    cart.length ?
+                    <Link to='/dashboard/payment'>
                 <button className="btn btn-primary">Pay</button>
+                </Link> :
+                <Link to='/dashboard/payment'>
+                <button disabled className="btn btn-primary">Pay</button>
+                </Link>
+                }
             </div>
             <div className="overflow-x-auto">
                 <table className="table w-full">
