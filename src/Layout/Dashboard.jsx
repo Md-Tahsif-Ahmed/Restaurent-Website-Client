@@ -20,6 +20,10 @@ const Dashboard = () => {
                         
                         <NavLink to='/dashboard/userHome'><CiHome size={28}/>Admin Home</NavLink></li>
                  
+                        <li className=" rounded-lg text-white">
+                        
+                        <NavLink to='/dashboard/additem'><CiShoppingCart size={28}/>Add Item</NavLink></li>
+                 
                     <li className=" rounded-lg text-white">
                         
                         <NavLink to='/dashboard/mitem'><FaList size={28}/>Manage Item</NavLink></li>
@@ -39,10 +43,7 @@ const Dashboard = () => {
 
 
               
-                    <li className=" rounded-lg text-white">
-                        
-                        <NavLink to='/dashboard/additem'><CiShoppingCart size={28}/>Add Item</NavLink></li>
-
+                    
                     <div className="divider"></div>
                     <li className=" rounded-lg text-white">
                         

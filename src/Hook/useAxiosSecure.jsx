@@ -1,10 +1,11 @@
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 const axiosSecure = axios.create({
     baseURL: 'http://localhost:3000/'
 })
 const useAxiosSecure = () => {
+    const navigate = useNavigate();
     const {logOut} = useAuth();
     // request interceptor to add authentication header for every secure call to the api
    axiosSecure.interceptors.request.use(function (config){
@@ -23,7 +24,7 @@ const useAxiosSecure = () => {
     console.log('interceptor error', status)
     if(status === 401 || status ===403){
         await logOut();
-        Navigate('/login');
+        navigate('/login');
     }
     return Promise.reject(error);
    })
