@@ -18,7 +18,7 @@ const Dashboard = () => {
                 <ul className="menu p-4"> 
                     <li className=" rounded-lg text-white">
                         
-                        <NavLink to='/dashboard/userHome'><CiHome size={28}/>Admin Home</NavLink></li>
+                        <NavLink to='/dashboard/adminhome'><CiHome size={28}/>Admin Home</NavLink></li>
                  
                         <li className=" rounded-lg text-white">
                         
